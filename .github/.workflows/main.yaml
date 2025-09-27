@@ -2,7 +2,7 @@ name: Deploy to EC2 via ECR + SSM
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [self-hosted, linux, ec2-runner]
 
 env:
   IMAGE_TAG: latest
