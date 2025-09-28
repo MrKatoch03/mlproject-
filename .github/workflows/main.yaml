@@ -69,6 +69,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Free up disk space
+        run: |
+          echo "=== Initial disk usage ==="
+          df -h
+          echo "=== Cleaning up space ==="
+          # Remove unused Docker resources
+          docker system prune -af --volumes || true
+          # Remove unused images
+          docker image prune -af || true
+          # Clean package cache
+          sudo apt-get clean || true
+          # Remove unnecessary system files (if not self-hosted, otherwise skip)
+          # sudo rm -rf /usr/share/dotnet || true
+          # sudo rm -rf /usr/local/lib/android || true
+          # sudo rm -rf /opt/ghc || true
+          echo "=== Disk usage after cleanup ==="
+          df -h
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
