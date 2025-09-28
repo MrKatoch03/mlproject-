@@ -20,5 +20,8 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Copy the rest of your application code
 COPY . .
 
-# Set default command (adjust as needed)
-CMD ["python", "main.py"]
+# Expose port
+EXPOSE 8080
+
+# Set default command - CHANGE THIS LINE
+CMD ["python", "app.py"]
